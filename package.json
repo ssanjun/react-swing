@@ -4,6 +4,8 @@
   "description": "react-swing is a React component for implementing swing",
   "main": "src/Swing.js",
   "scripts": {
+    "lint": "eslint ./src",
+    "lintfix": "eslint ./src --fix",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "babel src/Swing.js --out-file dist/Swing.js"
   },
