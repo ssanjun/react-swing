@@ -12,14 +12,14 @@ react-swing is a React component for implementing [swing](https://github.com/gaj
 
 ## Component Props
 | Name | Description | type | Default | isRequired |
-| --- | --- | --- | --- | --- |
+| --- | :--- | --- | --- | --- |
 | `tagName` | Create tag element for stack. | String | div | false |
 | `config` | Swing.Stack configuration object. [more information](https://github.com/gajus/swing#configuration) | Object | null | false |
 | `setStack` | Bind Swing.Stack instance to object. | function | - | true |
 
 ## Component Event Props
 | Name | Description |
-| --- | --- |
+| --- | :--- |
 | `throwout` | When card has been thrown out of the stack. |
 | `throwoutend` | When card has been thrown out of the stack and the animation has ended. |
 | `throwoutleft` | Shorthand for `throwout` event in the `Card.DIRECTION_LEFT` direction. |
