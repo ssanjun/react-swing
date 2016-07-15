@@ -6,10 +6,10 @@ matrix:
     allow_failures:
         - node_js: '0.11'
 before_install:
-    - npm install -g babel
+    - npm install -g babel-cli
     - cd /home/travis/build/ssanjun/react-swing
 install:
     - npm install
-    - babel /home/travis/build/ssanjun/react-swing/src/Swing.js --out-file /home/travis/build/ssanjun/react-swing/dist/Swing.js
+    - babel /home/travis/build/ssanjun/react-swing/src/Swing.js --out-file /home/travis/build/ssanjun/react-swingㅎ/dist/Swing.js
 notifications:
     email: false
