@@ -11,7 +11,7 @@ before_install:
 
 before_script:
     - pwd
-    - cat src/Swing.js
+    - ls -al
     - babel ./src/Swing.js --out-file ./dist/Swing.js
 
 install:
