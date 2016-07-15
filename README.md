@@ -11,6 +11,7 @@ react-swing is a React component for implementing [swing](https://github.com/gaj
 * [Usage Examples](./Examples)
 * [Component Props](#component-props)
 * [Component Event Props](#component-event-props)
+    * [Component Event Props Example](#component-event-props-example)
 
 
 ## Component Props
@@ -34,5 +35,25 @@ react-swing is a React component for implementing [swing](https://github.com/gaj
 | `dragend` | Hammer [panend](http://hammerjs.github.io/recognizer-pan/). |
 [more information](https://github.com/gajus/swing#events)
 
+### Component Event Props Example
+Using 'event name' set Swing Props and passing parameter as function 
+```javascript
+    <Swing
+        className="stack"
+        tagName="div"
+        setStack={(stack)=> this.setState({stack:stack})}
+        ref="stack"
+        throwout={(e)=>console.log('throwout',e)}
+    >
+        {/*
+            children elements is will be Card
+        */}
+        <div className="card clubs" ref="card1" throwout={(e)=>console.log('card throwout',e)}>♣</div>
+        <div className="card diamonds" ref="card2">♦</div>
+        <div className="card hearts" ref="card3">♥</div>
+        <div className="card spades" ref="card4">♠</div>
+    </Swing>
+```
+
 ## Thankyou for
-[gajus](https://github.com/gajus)
+[https://github.com/gajus](https://github.com/gajus) / [https://github.com/gajus/swing](https://github.com/gajus/swing) 
