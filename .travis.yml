@@ -10,7 +10,7 @@ before_install:
     - npm install -g mocha
 
 before_script:
-    - npm run build
+    - babel ./src/Swing.js --out-file ./dist/Swing.js
 
 install:
     - npm install
