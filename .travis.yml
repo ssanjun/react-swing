@@ -10,12 +10,7 @@ before_install:
     - npm install -g mocha
 
 before_script:
-    - pwd
-    - ls -al
-    - cd src
-    - ls -al
-    - cat Swing.js
-    - babel src/Swing.js --out-file dist/Swing.js
+    - babel src/swing.js --out-file dist/swing.js
 
 install:
     - npm install
