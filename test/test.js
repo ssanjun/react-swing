@@ -10,7 +10,7 @@ describe('Testing Swing Component', function() {
     jsdom({ skipWindowCheck: true });
 
     it('should be rendered', function() {
-        var Swing = require('../src/Swing.js').default;
+        var Swing = require('../src/swing.js').default;
         var component = TestUtils.renderIntoDocument(
             <Swing setStack={()=>{}}>
                 <div>♠</div>
