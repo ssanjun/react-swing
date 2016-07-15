@@ -10,6 +10,6 @@ before_install:
     - cd /home/travis/build/ssanjun/react-swing
 install:
     - npm install
-    - npm run build
+    - babel /home/travis/build/ssanjun/react-swing/src/Swing.js --out-file /home/travis/build/ssanjun/react-swing/dist/Swing.js
 notifications:
     email: false
