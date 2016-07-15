@@ -6,7 +6,7 @@
   "scripts": {
     "lint": "eslint ./src",
     "lintfix": "eslint ./src --fix",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "exit 0",
     "build": "babel ./src/Swing.js --out-file ./dist/Swing.js"
   },
   "keywords": [
