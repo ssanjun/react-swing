@@ -6,7 +6,7 @@
   "scripts": {
     "lint": "eslint ./src",
     "lintfix": "eslint ./src --fix",
-    "test": "exit 0",
+    "test": "mocha --compilers js:babel-register",
     "build": "babel ./src/Swing.js --out-file ./dist/Swing.js"
   },
   "keywords": [
@@ -21,8 +21,7 @@
     "url": "https://github.com/ssanjun/react-swing"
   },
   "license": "MIT",
-  "contributors": [
-  ],
+  "contributors": [],
   "repository": {
     "type": "git",
     "url": "https://github.com/ssanjun/react-swing.git"
@@ -47,9 +46,13 @@
     "eslint-plugin-babel": "^3.1.0",
     "eslint-plugin-react": "^4.2.3",
     "gulp": "^3.9.1",
+    "jsdom": "^9.4.1",
+    "mocha": "^2.5.3",
+    "mocha-jsdom": "^1.1.0",
     "react": "~15.0.0",
     "react-addons-test-utils": "^15.0.0",
     "react-dom": "~15.0.0",
+    "react-tools": "^0.13.3",
     "webpack": "^1.13.1",
     "webpack-dev-server": "^1.14.1"
   },

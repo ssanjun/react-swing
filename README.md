@@ -3,7 +3,7 @@
 [![Travis build status](http://img.shields.io/travis/ssanjun/react-swing/master.svg?style=flat-square)](https://travis-ci.org/ssanjun/react-swing)
 [![NPM version](http://img.shields.io/npm/v/react-swing.svg?style=flat-square)](https://www.npmjs.org/package/react-swing)
 
-react-swing is a React component for implementing [swing](https://github.com/gajus/swing) easily with React.
+react-swing is a React component for implementing [swing](https://github.com/gajus/swing) easily with React. (Examples: [http://ssanjun.github.io/examples/react-swing](http://ssanjun.github.io/examples/react-swing))
 
 ![Card stack example.](https://github.com/gajus/swing/blob/master/.README/card-stack.gif)
 
