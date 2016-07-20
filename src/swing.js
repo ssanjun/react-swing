@@ -62,7 +62,7 @@ class Swing extends Component {
     }
 
     render() {
-        const { children, tagName, config, ...others } = this.props;
+        const { children, setStack, tagName, config, ...others } = this.props;
         const Tag = tagName;
 
         return (

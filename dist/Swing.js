@@ -85,10 +85,11 @@ var Swing = function (_Component) {
         value: function render() {
             var _props = this.props;
             var children = _props.children;
+            var setStack = _props.setStack;
             var tagName = _props.tagName;
             var config = _props.config;
 
-            var others = _objectWithoutProperties(_props, ['children', 'tagName', 'config']);
+            var others = _objectWithoutProperties(_props, ['children', 'setStack', 'tagName', 'config']);
 
             var Tag = tagName;
 
