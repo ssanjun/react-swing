@@ -1,8 +1,8 @@
 {
   "name": "react-swing",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "react-swing is a React component for implementing swing",
-  "main": "src/Swing.js",
+  "main": "dist/Swing.js",
   "scripts": {
     "lint": "eslint ./src",
     "lintfix": "eslint ./src --fix",
