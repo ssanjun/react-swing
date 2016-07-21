@@ -12,7 +12,7 @@ react-swing is a React component for implementing [swing](https://github.com/gaj
 * [Component Props](#component-props)
 * [Component Event Props](#component-event-props)
     * [Component Event Props Example](#component-event-props-example)
-
+* [Troubleshooting](#troubleshooting)
 
 ## Component Props
 | Name | Description | type | Default | isRequired |
@@ -54,6 +54,64 @@ Using 'event name' set Swing Props and passing parameter as function
         <div className="card spades" ref="card4">♠</div>
     </Swing>
 ```
+
+
+## Troubleshooting
+
+### project/node_modules/hammerjs/hammer.js:2643 })(window, document, 'Hammer');
+```
+    /project/node_modules/hammerjs/hammer.js:2643
+    })(window, document, 'Hammer');
+       ^
+    
+    ReferenceError: window is not defined
+        at Object.<anonymous> (/Users/ssanjun/Documents/project/quizz/node_modules/hammerjs/hammer.js:2643:4)
+        at Module._compile (module.js:541:32)
+        at Module._extensions..js (module.js:550:10)
+        at Object.require.extensions.(anonymous function) [as .js] (/Users/ssanjun/Documents/project/quizz/node_modules/babel-register/lib/node.js:166:7)
+        at Module.load (module.js:458:32)
+        at tryModuleLoad (module.js:417:12)
+        at Function.Module._load (module.js:409:3)
+        at Module.require (module.js:468:17)
+        at require (internal/module.js:20:19)
+        at Object.<anonymous> (/Users/ssanjun/Documents/project/quizz/node_modules/swing/dist/card.js:19:17)
+```
+it is react Server Side Rendering Problem of hammer.js in swing.
+check the [this issue](https://github.com/hammerjs/hammer.js/pull/973). it will be update.
+
+### Solved
+```javascript
+
+    ...
+    // component Mounted    
+    componentDidMount() {
+        this.setState({
+            mounted: true
+        });
+    }
+    
+    ... 
+    
+    // render
+    render() {
+        return (
+            { data && (() => {
+                    if (this.state.mounted) {
+                        const Swing = require('react-swing').default;
+                        return (
+                            <Swing setStack={(stack)=>this.stack = stack}>
+                                { data.list.map((l) => <div>{l.a}</div>) }
+                            </Swing>
+                        );
+                    }
+                })()
+            }
+        )
+    }
+
+```
+lazy-loading 'react-swing' component.
+it will be work.
 
 ## Thankyou for
 [https://github.com/gajus](https://github.com/gajus) / [https://github.com/gajus/swing](https://github.com/gajus/swing) 
