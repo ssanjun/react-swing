@@ -30,7 +30,6 @@ class Swing extends Component {
             stack: stack,
             cardList: []
         };
-
     }
 
     componentDidMount() {
@@ -59,6 +58,40 @@ class Swing extends Component {
             stack: stack
         });
         this.props.setStack(stack);
+    }
+
+    componentDidUpdate(prevProps, prevState){
+      if(this.props.children.length > prevProps.children.length){
+        const events = ['throwout','throwoutend', 'throwoutleft', 'throwoutright', 'throwin', 'throwinend', 'dragstart', 'dragmove','dragend'];
+        const stack = this.state.stack;
+        events.map((event) => {
+            if (this.props[event]) {
+                stack.on(event, this.props[event]);
+            }
+        });
+
+        React.Children.forEach(this.props.children, (child, key) => {
+            const ref = child.ref || key;
+            const element = ReactDOM.findDOMNode(this.refs[`${ref}`]);
+            const card = stack.createCard(element);
+            let result = prevProps.children.find((c) => {
+              return c.key === child.key
+            })
+
+            if(!result){
+              events.map((event) => {
+                  if (child.props[event]) {
+                      console.log("9 fois ?")
+                      card.on(event, child.props[event]);
+                  }
+              });
+            }
+        });
+        this.setState({
+            stack: stack
+        });
+        this.props.setStack(stack);
+      }
     }
 
     render() {
