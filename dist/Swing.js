@@ -45,7 +45,6 @@ var Swing = function (_Component) {
             stack: stack,
             cardList: []
         };
-
         return _this;
     }
 
@@ -79,6 +78,45 @@ var Swing = function (_Component) {
                 stack: stack
             });
             this.props.setStack(stack);
+        }
+    }, {
+        key: 'componentDidUpdate',
+        value: function componentDidUpdate(prevProps, prevState) {
+            var _this3 = this;
+
+            if (this.props.children.length > prevProps.children.length) {
+                (function () {
+                    var events = ['throwout', 'throwoutend', 'throwoutleft', 'throwoutright', 'throwin', 'throwinend', 'dragstart', 'dragmove', 'dragend'];
+                    var stack = _this3.state.stack;
+                    events.map(function (event) {
+                        if (_this3.props[event]) {
+                            stack.on(event, _this3.props[event]);
+                        }
+                    });
+
+                    _react2.default.Children.forEach(_this3.props.children, function (child, key) {
+                        var ref = child.ref || key;
+                        var element = _reactDom2.default.findDOMNode(_this3.refs['' + ref]);
+                        var card = stack.createCard(element);
+                        var result = prevProps.children.find(function (c) {
+                            return c.key === child.key;
+                        });
+
+                        if (!result) {
+                            events.map(function (event) {
+                                if (child.props[event]) {
+                                    console.log("9 fois ?");
+                                    card.on(event, child.props[event]);
+                                }
+                            });
+                        }
+                    });
+                    _this3.setState({
+                        stack: stack
+                    });
+                    _this3.props.setStack(stack);
+                })();
+            }
         }
     }, {
         key: 'render',

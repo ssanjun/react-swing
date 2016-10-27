@@ -1,6 +1,6 @@
 {
   "name": "react-swing",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "react-swing is a React component for implementing swing",
   "main": "dist/Swing.js",
   "scripts": {
