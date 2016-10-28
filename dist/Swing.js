@@ -105,7 +105,6 @@ var Swing = function (_Component) {
                         if (!result) {
                             events.map(function (event) {
                                 if (child.props[event]) {
-                                    console.log("9 fois ?");
                                     card.on(event, child.props[event]);
                                 }
                             });
