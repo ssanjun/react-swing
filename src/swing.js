@@ -15,7 +15,16 @@ class Swing extends Component {
         children: PropTypes.node.isRequired,
         setStack: PropTypes.func.isRequired,
         tagName: PropTypes.string,
-        config: PropTypes.object
+        config: PropTypes.object,
+        throwout: PropTypes.func,
+        throwoutend: PropTypes.func,
+        throwoutleft: PropTypes.func,
+        throwoutright: PropTypes.func,
+        throwin: PropTypes.func,
+        throwinend: PropTypes.func,
+        dragstart: PropTypes.func,
+        dragmove: PropTypes.func,
+        dragend: PropTypes.func
     };
 
     static defaultProps = {
