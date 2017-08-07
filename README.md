@@ -14,6 +14,22 @@ react-swing is a React component for implementing [swing](https://github.com/gaj
     * [Component Event Props Example](#component-event-props-example)
 * [Troubleshooting](#troubleshooting)
 
+## React Version Compatibility
+### < 15.3 React
+This package is compatible with **React 15.3.0** and lower.
+
+```
+npm install --save react-swing@0.0.9
+```
+
+### >= 15.3 React 
+
+This package is compatible with **React 15.3.0** and higher.
+
+```
+npm install --save react-swing@^1.0.0
+```
+
 ## Component Props
 | Name | Description | type | Default | isRequired |
 | --- | :--- | --- | --- | --- |

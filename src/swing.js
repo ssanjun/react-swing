@@ -5,7 +5,8 @@
  * Created by ssanjun on 2016. 7. 12..
  */
 
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import { Stack, Card } from 'swing';
 

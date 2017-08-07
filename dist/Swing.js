@@ -16,6 +16,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _reactDom = require('react-dom');
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
@@ -154,19 +158,19 @@ var Swing = function (_Component) {
 }(_react.Component);
 
 Swing.propTypes = {
-  children: _react.PropTypes.node.isRequired,
-  setStack: _react.PropTypes.func.isRequired,
-  tagName: _react.PropTypes.string,
-  config: _react.PropTypes.object,
-  throwout: _react.PropTypes.func,
-  throwoutend: _react.PropTypes.func,
-  throwoutleft: _react.PropTypes.func,
-  throwoutright: _react.PropTypes.func,
-  throwin: _react.PropTypes.func,
-  throwinend: _react.PropTypes.func,
-  dragstart: _react.PropTypes.func,
-  dragmove: _react.PropTypes.func,
-  dragend: _react.PropTypes.func
+  children: _propTypes2.default.node.isRequired,
+  setStack: _propTypes2.default.func.isRequired,
+  tagName: _propTypes2.default.string,
+  config: _propTypes2.default.object,
+  throwout: _propTypes2.default.func,
+  throwoutend: _propTypes2.default.func,
+  throwoutleft: _propTypes2.default.func,
+  throwoutright: _propTypes2.default.func,
+  throwin: _propTypes2.default.func,
+  throwinend: _propTypes2.default.func,
+  dragstart: _propTypes2.default.func,
+  dragmove: _propTypes2.default.func,
+  dragend: _propTypes2.default.func
 };
 Swing.defaultProps = {
   tagName: 'div'
