@@ -137,9 +137,14 @@ var Swing = function (_Component) {
         tagProps,
         _react2.default.Children.map(children, function (child, key) {
           var ref = child.ref || key;
-          return _react2.default.cloneElement(child, {
-            ref: '' + ref
-          });
+          var childProps = Object.keys(child.props).reduce(function (result, key, index) {
+            if (Swing.EVENTS.indexOf(key) === -1) {
+              result[key] = child.props[key];
+            }
+            return result;
+          }, {});
+          childProps.ref = ref;
+          return _react2.default.createElement(child.type, childProps);
         })
       );
     }

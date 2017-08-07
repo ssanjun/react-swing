@@ -117,9 +117,14 @@ class Swing extends Component {
       <Tag {...tagProps}>
         {React.Children.map(children, (child, key) => {
           const ref = child.ref || key;
-          return React.cloneElement(child, {
-            ref: `${ref}`
-          });
+          const childProps = Object.keys(child.props).reduce((result, key, index) => {
+            if (Swing.EVENTS.indexOf(key) === -1) {
+              result[key] = child.props[key];
+            }
+            return result;
+          }, {});
+          childProps.ref = ref;
+          return React.createElement(child.type, childProps);
         })}
       </Tag>
     );
