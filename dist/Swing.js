@@ -6,7 +6,7 @@
  */
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 exports.Card = exports.Stack = undefined;
 
@@ -33,128 +33,140 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var Swing = function (_Component) {
-    _inherits(Swing, _Component);
+  _inherits(Swing, _Component);
 
-    function Swing(props, context) {
-        _classCallCheck(this, Swing);
+  function Swing(props, context) {
+    _classCallCheck(this, Swing);
 
-        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Swing).call(this, props, context));
+    var _this = _possibleConstructorReturn(this, (Swing.__proto__ || Object.getPrototypeOf(Swing)).call(this, props, context));
 
-        var stack = (0, _swing.Stack)(props.config);
-        _this.state = {
-            stack: stack,
-            cardList: []
-        };
-        return _this;
+    var stack = (0, _swing.Stack)(props.config);
+    _this.state = {
+      stack: stack,
+      cardList: []
+    };
+    return _this;
+  }
+
+  _createClass(Swing, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      var stack = this.state.stack;
+
+      Swing.EVENTS.map(function (event) {
+        if (_this2.props[event]) {
+          stack.on(event, _this2.props[event]);
+        }
+      });
+
+      _react2.default.Children.forEach(this.props.children, function (child, key) {
+        var ref = child.ref || key;
+        var element = _reactDom2.default.findDOMNode(_this2.refs['' + ref]);
+        var card = stack.createCard(element);
+
+        Swing.EVENTS.map(function (event) {
+          if (child.props[event]) {
+            card.on(event, child.props[event]);
+          }
+        });
+      });
+
+      this.setState({
+        stack: stack
+      });
+      this.props.setStack(stack);
     }
+  }, {
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate(prevProps, prevState) {
+      var _this3 = this;
 
-    _createClass(Swing, [{
-        key: 'componentDidMount',
-        value: function componentDidMount() {
-            var _this2 = this;
+      if (this.props.children.length > prevProps.children.length) {
+        var stack = this.state.stack;
+        Swing.EVENTS.map(function (event) {
+          if (_this3.props[event]) {
+            stack.on(event, _this3.props[event]);
+          }
+        });
 
-            var events = ['throwout', 'throwoutend', 'throwoutleft', 'throwoutright', 'throwin', 'throwinend', 'dragstart', 'dragmove', 'dragend'];
-            var stack = this.state.stack;
+        _react2.default.Children.forEach(this.props.children, function (child, key) {
+          var ref = child.ref || key;
+          var element = _reactDom2.default.findDOMNode(_this3.refs['' + ref]);
+          var card = stack.createCard(element);
+          var result = prevProps.children.find(function (c) {
+            return c.key === child.key;
+          });
 
-            events.map(function (event) {
-                if (_this2.props[event]) {
-                    stack.on(event, _this2.props[event]);
-                }
+          if (!result) {
+            Swing.EVENTS.map(function (event) {
+              if (child.props[event]) {
+                card.on(event, child.props[event]);
+              }
             });
+          }
+        });
+        this.setState({
+          stack: stack
+        });
+        this.props.setStack(stack);
+      }
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _props = this.props,
+          children = _props.children,
+          setStack = _props.setStack,
+          tagName = _props.tagName,
+          config = _props.config,
+          otherProps = _objectWithoutProperties(_props, ['children', 'setStack', 'tagName', 'config']);
 
-            _react2.default.Children.forEach(this.props.children, function (child, key) {
-                var ref = child.ref || key;
-                var element = _reactDom2.default.findDOMNode(_this2.refs['' + ref]);
-                var card = stack.createCard(element);
+      var Tag = tagName;
 
-                events.map(function (event) {
-                    if (child.props[event]) {
-                        card.on(event, child.props[event]);
-                    }
-                });
-            });
-
-            this.setState({
-                stack: stack
-            });
-            this.props.setStack(stack);
+      var tagProps = Object.keys(otherProps).reduce(function (result, key, index) {
+        if (Swing.EVENTS.indexOf(key) === -1) {
+          result[key] = otherProps[key];
         }
-    }, {
-        key: 'componentDidUpdate',
-        value: function componentDidUpdate(prevProps, prevState) {
-            var _this3 = this;
+        return result;
+      }, {});
 
-            if (this.props.children.length > prevProps.children.length) {
-                (function () {
-                    var events = ['throwout', 'throwoutend', 'throwoutleft', 'throwoutright', 'throwin', 'throwinend', 'dragstart', 'dragmove', 'dragend'];
-                    var stack = _this3.state.stack;
-                    events.map(function (event) {
-                        if (_this3.props[event]) {
-                            stack.on(event, _this3.props[event]);
-                        }
-                    });
+      return _react2.default.createElement(
+        Tag,
+        tagProps,
+        _react2.default.Children.map(children, function (child, key) {
+          var ref = child.ref || key;
+          return _react2.default.cloneElement(child, {
+            ref: '' + ref
+          });
+        })
+      );
+    }
+  }]);
 
-                    _react2.default.Children.forEach(_this3.props.children, function (child, key) {
-                        var ref = child.ref || key;
-                        var element = _reactDom2.default.findDOMNode(_this3.refs['' + ref]);
-                        var card = stack.createCard(element);
-                        var result = prevProps.children.find(function (c) {
-                            return c.key === child.key;
-                        });
-
-                        if (!result) {
-                            events.map(function (event) {
-                                if (child.props[event]) {
-                                    card.on(event, child.props[event]);
-                                }
-                            });
-                        }
-                    });
-                    _this3.setState({
-                        stack: stack
-                    });
-                    _this3.props.setStack(stack);
-                })();
-            }
-        }
-    }, {
-        key: 'render',
-        value: function render() {
-            var _props = this.props;
-            var children = _props.children;
-            var setStack = _props.setStack;
-            var tagName = _props.tagName;
-            var config = _props.config;
-
-            var others = _objectWithoutProperties(_props, ['children', 'setStack', 'tagName', 'config']);
-
-            var Tag = tagName;
-
-            return _react2.default.createElement(
-                Tag,
-                others,
-                _react2.default.Children.map(children, function (child, key) {
-                    var ref = child.ref || key;
-                    return _react2.default.cloneElement(child, {
-                        ref: '' + ref
-                    });
-                })
-            );
-        }
-    }]);
-
-    return Swing;
+  return Swing;
 }(_react.Component);
 
 Swing.propTypes = {
-    children: _react.PropTypes.node.isRequired,
-    setStack: _react.PropTypes.func.isRequired,
-    tagName: _react.PropTypes.string,
-    config: _react.PropTypes.object
+  children: _react.PropTypes.node.isRequired,
+  setStack: _react.PropTypes.func.isRequired,
+  tagName: _react.PropTypes.string,
+  config: _react.PropTypes.object,
+  throwout: _react.PropTypes.func,
+  throwoutend: _react.PropTypes.func,
+  throwoutleft: _react.PropTypes.func,
+  throwoutright: _react.PropTypes.func,
+  throwin: _react.PropTypes.func,
+  throwinend: _react.PropTypes.func,
+  dragstart: _react.PropTypes.func,
+  dragmove: _react.PropTypes.func,
+  dragend: _react.PropTypes.func
 };
 Swing.defaultProps = {
-    tagName: 'div'
+  tagName: 'div'
 };
+Swing.EVENTS = ['throwout', 'throwoutend', 'throwoutleft', 'throwoutright', 'throwin', 'throwinend', 'dragstart', 'dragmove', 'dragend'];
 exports.default = Swing;
 exports.Stack = _swing.Stack;
 exports.Card = _swing.Card;
