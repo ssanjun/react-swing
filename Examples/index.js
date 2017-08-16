@@ -6,7 +6,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-import Swing from '../dist/Swing.js';
+import Swing, { Stack, Card, Direction } from '../dist/Swing.js';
 
 class App extends Component {
 
@@ -21,6 +21,8 @@ class App extends Component {
 
     // throwOut Method
     throwCard() {
+        // Swing Card Directions
+        console.log('Swing.DIRECTION', Swing.DIRECTION);
 
         // Swing Component Childrens refs
         const target = this.refs.stack.refs.card2;
@@ -32,7 +34,7 @@ class App extends Component {
         const card = this.state.stack.getCard(el);
 
         // throwOut method call
-        card.throwOut(100, 200);
+        card.throwOut(100, 200, Swing.DIRECTION.RIGHT);
     }
     
     render() {
