@@ -8,7 +8,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
-import { Stack, Card } from 'swing';
+import { Stack, Card, Direction } from 'swing';
 
 
 class Swing extends Component {
@@ -33,6 +33,7 @@ class Swing extends Component {
   };
 
   static EVENTS = ['throwout','throwoutend', 'throwoutleft', 'throwoutright', 'throwin', 'throwinend', 'dragstart', 'dragmove','dragend'];
+  static DIRECTION = Direction;
 
   constructor(props, context) {
     super(props, context);

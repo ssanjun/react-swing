@@ -176,6 +176,7 @@ Swing.defaultProps = {
   tagName: 'div'
 };
 Swing.EVENTS = ['throwout', 'throwoutend', 'throwoutleft', 'throwoutright', 'throwin', 'throwinend', 'dragstart', 'dragmove', 'dragend'];
+Swing.DIRECTION = _swing.Direction;
 exports.default = Swing;
 exports.Stack = _swing.Stack;
 exports.Card = _swing.Card;
