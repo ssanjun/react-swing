@@ -4,13 +4,14 @@
  */
 
 module.exports = function(markup) {
-    if (typeof document !== 'undefined') return;
+  if (typeof document !== 'undefined') return;
 
-    var jsdom = require('jsdom').jsdom;
+  var JSDOM = require('jsdom').JSDOM;
 
-    global.document = jsdom(markup || '');
-    global.window = document.defaultView;
-    global.navigator = {
-        userAgent: 'node.js'
-    };
+  global.DOM = new JSDOM(markup || '', { url: 'http://localhost' });
+  global.window = global.DOM.window;
+  global.document = global.DOM.window.document;
+  global.navigator = {
+    userAgent: 'node.js',
+  };
 };

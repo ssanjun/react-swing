@@ -7,27 +7,25 @@ var webpack = require('webpack');
 var path = require('path');
 
 module.exports = {
-    devtool: '#inline-source-map',
-    entry: {
-        'bundle.js' : [
-            './index.js'
-        ]
-    },
-    output: {
-        path: path.join(__dirname, 'build'),
-        filename: '[name]'
-    },
-    module: {
-        loaders: [
-            {
-                test: /\.js$/, loaders: ['babel'], exclude: /node_modules/
-            }
-        ]
-    },
-    resolve: {
-        extensions: ['', '.js', '.js']
-    },
-    plugins: [
-        new webpack.NoErrorsPlugin()
-    ]
+  devtool: '#inline-source-map',
+  entry: {
+    'bundle.js': ['./index.js'],
+  },
+  output: {
+    path: path.join(__dirname, 'build'),
+    filename: '[name]',
+  },
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        loaders: ['babel-loader'],
+        exclude: /node_modules/,
+      },
+    ],
+  },
+  resolve: {
+    extensions: ['.js'],
+  },
+  plugins: [new webpack.NoEmitOnErrorsPlugin()],
 };

@@ -1,13 +1,14 @@
 {
   "name": "react-swing",
-  "version": "1.0.2",
+  "version": "2.0.0",
   "description": "react-swing is a React component for implementing swing",
-  "main": "dist/Swing.js",
+  "main": "dist/react-swing.js",
+  "types": "dist/react-swing.d.ts",
   "scripts": {
-    "lint": "eslint ./src",
-    "lintfix": "eslint ./src --fix",
-    "test": "mocha --compilers js:babel-register",
-    "build": "babel ./src/Swing.js --out-file ./dist/Swing.js"
+    "lint": "./node_modules/.bin/tslint src/*.tsx",
+    "test": "./node_modules/jest/bin/jest.js",
+    "build": "tsc",
+    "develop": "tsc --pretty -watch"
   },
   "keywords": [
     "react-component",
@@ -30,39 +31,48 @@
     "url": "http://github.com/ssanjun/react-swing/issues"
   },
   "devDependencies": {
-    "babel": "^6.5.2",
-    "babel-cli": "^6.6.4",
-    "babel-core": "^6.7.4",
-    "babel-eslint": "^6.0.4",
-    "babel-loader": "^6.2.4",
-    "babel-plugin-transform-es2015-modules-umd": "^6.8.0",
-    "babel-plugin-transform-runtime": "^6.6.0",
-    "babel-polyfill": "^6.7.4",
-    "babel-preset-es2015": "^6.6.0",
-    "babel-preset-react": "^6.5.0",
-    "babel-preset-stage-0": "^6.5.0",
-    "del": "^2.2.1",
-    "eslint": "^2.5.0",
-    "eslint-plugin-babel": "^3.1.0",
-    "eslint-plugin-react": "^4.2.3",
+    "@types/react": "^16.4.11",
+    "@types/react-dom": "^16.0.7",
+    "babel": "^6.23.0",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^8.2.6",
+    "babel-jest": "^23.4.2",
+    "babel-loader": "^7.1.5",
+    "babel-plugin-transform-es2015-modules-umd": "^6.24.1",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "del": "^3.0.0",
+    "enzyme": "^3.5.0",
+    "eslint": "^5.4.0",
+    "eslint-plugin-babel": "^5.1.0",
+    "eslint-plugin-react": "^7.11.1",
     "gulp": "^3.9.1",
-    "jsdom": "^9.4.1",
-    "mocha": "^2.5.3",
-    "mocha-jsdom": "^1.1.0",
-    "react": "^15.0.0",
-    "react-addons-test-utils": "^15.3.0",
-    "react-dom": "^15.3.0",
+    "jest": "^23.5.0",
+    "jsdom": "^12.0.0",
+    "mocha-jsdom": "^2.0.0",
+    "prettier": "^1.14.2",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2",
     "react-tools": "^0.13.3",
-    "webpack": "^1.13.1",
-    "webpack-dev-server": "^1.14.1"
+    "tslint": "^5.11.0",
+    "tslint-config-airbnb": "^5.10.0",
+    "tslint-config-prettier": "^1.15.0",
+    "tslint-plugin-prettier": "^1.3.0",
+    "tslint-react": "^3.6.0",
+    "typescript": "^3.0.1",
+    "webpack": "^4.17.1",
+    "webpack-dev-server": "^3.1.5"
   },
   "peerDependencies": {
-    "react": "~0.14.3 || ^15.0.0 || >= 15.5.0",
-    "react-dom": "~0.14.3 || ^15.0.0 || >= 15.5.0"
+    "react": "~0.14.3 || ^15.0.0 || >= 15.5.0 || >= 16.0.0",
+    "react-dom": "~0.14.3 || ^15.0.0 || >= 15.5.0 || >= 16.0.0"
   },
   "dependencies": {
-    "babel-runtime": "^6.6.1",
-    "swing": "^3.0.3",
-    "prop-types": "^15.5.8"
+    "babel-runtime": "^6.26.0",
+    "swing": "^3.1.2"
   }
 }
