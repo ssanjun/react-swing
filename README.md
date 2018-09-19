@@ -35,7 +35,7 @@ npm install --save react-swing@^1.0.0
 
 ### >= 16.3 React
 
-This package is compatible with **React 16.3.0** and higher
+This package is compatible with **React 16.3.0** and higher.
 
 ```
 npm install --save react-swing@^2.0.0
