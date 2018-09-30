@@ -125,11 +125,12 @@ class ReactSwing extends React.Component<IReactSwingProps, IReactSwingState> {
   }
 
   render() {
-    const { children } = this.props;
+    // tslint:disable-next-line
+    const { children, setStack, config, ...restProps } = this.props;
 
-    const tagProps = Object.keys(this.props).reduce((result, key) => {
+    const tagProps = Object.keys(restProps).reduce((result, key) => {
       if (ReactSwing.EVENTS.indexOf(key as swing.Event) === -1) {
-        result[key] = this.props[key];
+        result[key] = restProps[key];
       }
       return result;
     }, {});

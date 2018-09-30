@@ -24,6 +24,15 @@ var __assign = (this && this.__assign) || function () {
     };
     return __assign.apply(this, arguments);
 };
+var __rest = (this && this.__rest) || function (s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) if (e.indexOf(p[i]) < 0)
+            t[p[i]] = s[p[i]];
+    return t;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * @project react-swing
@@ -110,10 +119,11 @@ var ReactSwing = /** @class */ (function (_super) {
     };
     ReactSwing.prototype.render = function () {
         var _this = this;
-        var children = this.props.children;
-        var tagProps = Object.keys(this.props).reduce(function (result, key) {
+        // tslint:disable-next-line
+        var _a = this.props, children = _a.children, setStack = _a.setStack, config = _a.config, restProps = __rest(_a, ["children", "setStack", "config"]);
+        var tagProps = Object.keys(restProps).reduce(function (result, key) {
             if (ReactSwing.EVENTS.indexOf(key) === -1) {
-                result[key] = _this.props[key];
+                result[key] = restProps[key];
             }
             return result;
         }, {});
