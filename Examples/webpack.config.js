@@ -7,6 +7,7 @@ var webpack = require('webpack');
 var path = require('path');
 
 module.exports = {
+  mode: 'development',
   devtool: '#inline-source-map',
   entry: {
     'bundle.js': ['./index.js'],

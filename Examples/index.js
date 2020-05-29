@@ -6,7 +6,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-import ReactSwing from '../dist/react-ReactSwing.js';
+import ReactSwing from '../dist/react-swing.js';
 
 class App extends Component {
   stackEl = React.createRef();
@@ -54,14 +54,14 @@ class App extends Component {
           <ReactSwing
             className="stack"
             tagName="div"
-            setStack={stack => this.setState({ stack })}
+            setStack={(stack) => this.setState({ stack })}
             ref={this.stackEl}
-            throwout={e => console.log('throwout', e)}
+            throwout={(e) => console.log('throwout', e)}
           >
             {/*
                 children elements is will be Card
             */}
-            <div className="card clubs" ref="card1" throwout={e => console.log('card throwout', e)}>
+            <div className="card clubs" ref="card1" throwout={(e) => console.log('card throwout', e)}>
               ♣
             </div>
             <div className="card diamonds" ref="card2">

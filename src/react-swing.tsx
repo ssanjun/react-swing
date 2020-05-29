@@ -5,69 +5,50 @@
  * Created by ssanjun on 2018. 7. 08..
  */
 
-import * as React from 'react';
+import React, { useRef, useEffect, forwardRef } from 'react';
 import * as swing from 'swing';
 
 interface IReactSwingProps {
-  children: React.ReactChildren;
-
   setStack: (stack: swing.Stack) => void;
   config: any;
 }
 
-interface IReactSwingState {
-  stack: swing.Stack;
-  cardList: swing.Card[];
-}
+type TReactSwing = React.ForwardRefExoticComponent<IReactSwingProps> & {
+  EVENTS: swing.Event[];
+  DIRECTION: typeof swing.Direction;
+};
 
-class ReactSwing extends React.Component<IReactSwingProps, IReactSwingState> {
-  static EVENTS: swing.Event[] = [
-    'throwout',
-    'throwoutend',
-    'throwoutleft',
-    'throwoutright',
-    'throwin',
-    'throwinend',
-    'dragstart',
-    'dragmove',
-    'dragend',
-  ];
+const ReactSwing = forwardRef<HTMLDivElement, IReactSwingProps>(({ children, config, setStack, ...restProps }, ref) => {
+  const stack = useRef(swing.Stack(config || {})).current;
+  const childElements = useRef<React.RefObject<HTMLElement>[]>([]).current;
 
-  static DIRECTION: swing.Direction = swing.Direction as any;
+  React.Children.forEach(children, (_, index) => {
+    childElements[index] = React.createRef();
+  });
 
-  private childElements: React.RefObject<any>[] = [];
-  constructor(props: IReactSwingProps) {
-    super(props);
-
-    const stack = swing.Stack(props.config || {});
-
-    React.Children.forEach(props.children, (_, index) => {
-      this.childElements[index] = React.createRef();
-    });
-
-    this.state = {
-      stack,
-      cardList: [],
-    };
-  }
-
-  componentDidMount() {
-    const { children } = this.props;
-    const { stack } = this.state;
-
-    ReactSwing.EVENTS.forEach(eventName => {
-      if (this.props[eventName]) {
-        stack.on(eventName, this.props[eventName]);
+  useEffect(() => {
+    // bind events
+    ReactSwing.EVENTS.forEach((eventName) => {
+      if (typeof restProps[eventName] === 'function') {
+        stack.on(eventName, restProps[eventName]);
       }
     });
+  }, []);
 
-    React.Children.forEach(children, (child: React.ReactChild, index) => {
-      const element = this.childElements[index];
+  useEffect(() => {
+    // create card
+    React.Children.forEach(children, (child, index) => {
+      const element = childElements[index];
 
       if (element && element.current) {
+        const existCard = stack.getCard(element.current);
+        if (existCard) {
+          existCard.destroy();
+        }
+
         const card = stack.createCard(element.current);
 
-        ReactSwing.EVENTS.forEach(eventName => {
+        ReactSwing.EVENTS.forEach((eventName) => {
           if ((child as React.ReactElement<any>).props[eventName]) {
             card.on(eventName, (child as React.ReactElement<any>).props[eventName]);
           }
@@ -75,81 +56,47 @@ class ReactSwing extends React.Component<IReactSwingProps, IReactSwingState> {
       }
     });
 
-    this.setState({
-      stack,
-    });
-
-    if (this.props.setStack) {
-      this.props.setStack(stack);
+    if (typeof setStack === 'function') {
+      (stack as any).childElements = childElements;
+      setStack(stack);
     }
-  }
+  }, [React.Children.count(children)]);
 
-  componentDidUpdate(prevProps) {
-    const { children } = this.props;
+  const tagProps = Object.keys(restProps).reduce((result, key) => {
+    if (ReactSwing.EVENTS.indexOf(key as swing.Event) === -1) {
+      result[key] = restProps[key];
+    }
+    return result;
+  }, {});
 
-    const currentChildrenCount = React.Children.count(children);
-    if (currentChildrenCount > prevProps.children.length) {
-      const stack = swing.Stack(this.props.config || {});
-      ReactSwing.EVENTS.forEach(eventName => {
-        if (this.props[eventName]) {
-          stack.on(eventName, this.props[eventName]);
-        }
-      });
-
-      React.Children.forEach(children, (child: React.ReactChild, index) => {
-        const element = this.childElements[index];
-
-        if (element && element.current) {
-          const card = stack.createCard(element.current);
-          const result = prevProps.children.find(c => {
-            return c.key === (child as React.ReactElement<any>).key;
-          });
-
-          if (!result) {
-            ReactSwing.EVENTS.forEach(eventName => {
-              if ((child as React.ReactElement<any>).props[eventName]) {
-                card.on(eventName, (child as React.ReactElement<any>).props[eventName]);
-              }
-            });
+  return (
+    <div {...tagProps} ref={ref}>
+      {React.Children.map(children, (child, index) => {
+        const childProps = Object.keys((child as React.ReactElement<any>).props).reduce((result, key) => {
+          if (ReactSwing.EVENTS.indexOf(key as swing.Event) === -1) {
+            result[key] = (child as React.ReactElement<any>).props[key];
           }
-        }
-      });
-      this.setState({
-        stack,
-      });
+          return result;
+        }, {});
+        (childProps as any).ref = childElements[index];
+        return React.createElement((child as React.ReactElement<any>).type, childProps);
+      })}
+    </div>
+  );
+}) as TReactSwing;
 
-      if (this.props.setStack) {
-        this.props.setStack(stack);
-      }
-    }
-  }
+ReactSwing.EVENTS = [
+  'throwout',
+  'throwoutend',
+  'throwoutleft',
+  'throwoutright',
+  'throwin',
+  'throwinend',
+  'dragstart',
+  'dragmove',
+  'dragend',
+];
 
-  render() {
-    // tslint:disable-next-line
-    const { children, setStack, config, ...restProps } = this.props;
-
-    const tagProps = Object.keys(restProps).reduce((result, key) => {
-      if (ReactSwing.EVENTS.indexOf(key as swing.Event) === -1) {
-        result[key] = restProps[key];
-      }
-      return result;
-    }, {});
-
-    return (
-      <div {...tagProps}>
-        {React.Children.map(children, (child: React.ReactChild, index) => {
-          const childProps = Object.keys((child as React.ReactElement<any>).props).reduce((result, key) => {
-            if (ReactSwing.EVENTS.indexOf(key as swing.Event) === -1) {
-              result[key] = (child as React.ReactElement<any>).props[key];
-            }
-            return result;
-          }, {});
-          (childProps as any).ref = this.childElements[index];
-          return React.createElement((child as React.ReactElement<any>).type, childProps);
-        })}
-      </div>
-    );
-  }
-}
+ReactSwing.DIRECTION = swing.Direction;
 
 export default ReactSwing;

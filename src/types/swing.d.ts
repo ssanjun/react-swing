@@ -14,6 +14,7 @@ declare module 'swing' {
     throwOutDistance(min: number, max: number): number;
     rotation(coordinateX: number, coordinateY: number, element: HTMLElement, maxRotation: number): number;
     on(event: Event, callback: () => void): void;
+    destroy(): void;
 
     THROW_IN: 'in';
     THROW_OUT: 'out';

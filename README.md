@@ -17,20 +17,12 @@ react-swing is a React component for implementing [swing](https://github.com/gaj
 
 ## React Version Compatibility
 
-### < 15.3 React
+### >= 16.8 React with hook
 
-This package is compatible with **React 15.3.0** and lower.
-
-```
-npm install --save react-swing@0.0.9
-```
-
-### >= 15.3 React < 16.0
-
-This package is compatible with **React 15.3.0** up to **React 16.0.0**.
+This package is compatible with **React 16.8** and higher.
 
 ```
-npm install --save react-swing@^1.0.0
+npm install --save react-swing@^3.0.0
 ```
 
 ### >= 16.3 React
@@ -41,13 +33,29 @@ This package is compatible with **React 16.3.0** and higher.
 npm install --save react-swing@^2.0.0
 ```
 
+### >= 15.3 React < 16.0
+
+This package is compatible with **React 15.3.0** up to **React 16.0.0**.
+
+```
+npm install --save react-swing@^1.0.0
+```
+
+### < 15.3 React
+
+This package is compatible with **React 15.3.0** and lower.
+
+```
+npm install --save react-swing@0.0.9
+```
+
 ## Component Props
 
-| Name       | Description                                                                                        | type     | Default | isRequired |
-| ---------- | :------------------------------------------------------------------------------------------------- | -------- | ------- | ---------- |
-| `tagName`  | Create tag element for stack.                                                                      | String   | div     | false      |
-| `config`   | Swing.Stack configuration object. [more information](https://github.com/gajus/swing#configuration) | Object   | null    | false      |
-| `setStack` | Bind Swing.Stack instance to object.                                                               | function | -       | true       |
+| Name          | Description                                                                                        | type       | Default | isRequired | support          |
+| ------------- | :------------------------------------------------------------------------------------------------- | ---------- | ------- | ---------- | ---------------- |
+| ~~`tagName`~~ | ~~Create tag element for stack.~~                                                                  | ~~String~~ | ~~div~~ | ~~false~~  | deprecated 3.0.0 |
+| `config`      | Swing.Stack configuration object. [more information](https://github.com/gajus/swing#configuration) | Object     | null    | false      |
+| `setStack`    | Bind Swing.Stack instance to object.                                                               | function   | -       | true       |
 
 ## Component Event Props
 
@@ -68,19 +76,23 @@ npm install --save react-swing@^2.0.0
 ### Component Event Props Example
 
 Using 'event name' set Swing Props and passing parameter as function
+more details
+
+- [react functional component example (v.3.0.0 higher)](https://github.com/ssanjun/react-swing/blob/master/Examples/index-hook.js)
+- [react class component example (v. 2.0.1)](https://github.com/ssanjun/react-swing/blob/master/Examples/index.js)
 
 ```javascript
 <Swing
   className="stack"
   tagName="div"
-  setStack={stack => this.setState({ stack: stack })}
+  setStack={(stack) => this.setState({ stack: stack })}
   ref="stack"
-  throwout={e => console.log('throwout', e)}
+  throwout={(e) => console.log('throwout', e)}
 >
   {/*
             children elements is will be Card
         */}
-  <div className="card clubs" ref="card1" throwout={e => console.log('card throwout', e)}>
+  <div className="card clubs" ref="card1" throwout={(e) => console.log('card throwout', e)}>
     ♣
   </div>
   <div className="card diamonds" ref="card2">
@@ -154,6 +166,6 @@ check the [this issue](https://github.com/hammerjs/hammer.js/pull/973). it will 
 lazy-loading 'react-swing' component.
 it will be work.
 
-## Thankyou for
+## Thank you for
 
 [https://github.com/gajus](https://github.com/gajus) / [https://github.com/gajus/swing](https://github.com/gajus/swing)
